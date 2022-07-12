@@ -1,0 +1,10 @@
+@server=localhost:18181
+
+### 获取用户绑定二维码，需要用户认证
+GET http://{{server}}/key?name=root
+
+### 获取当前检验码，需要用户认证
+GET http://{{server}}/passcode?name=root
+
+### 验证用户校验码是否有效
+GET  http://{{server}}/validate?name=root&passcode=820162

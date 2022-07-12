@@ -1,0 +1,31 @@
+version: '2'
+services:
+  opa:
+    image: openpolicyagent/opa
+    ports:
+      - 8181:8181
+    command:
+      - "run"
+      - "--server"
+      - "--log-level=debug"
+      # Authorization policies.
+      - "display.rego"
+      - "pull.rego"
+      - "sudo_authz.rego"
+      - "sshd_authz.rego"
+    volumes:
+      # Authorization policies.
+      - ./policy/display.rego:/display.rego
+      - ./policy/pull.rego:/pull.rego
+      - ./policy/sudo_authz.rego:/sudo_authz.rego
+      - ./policy/sshd_authz.rego:/sshd_authz.rego
+
+  otpd:
+    build: ../
+    ports:
+      - 18181:18181
+
+  server:
+    image: openpolicyagent/demo-pam
+    ports:
+      - "10022:22"

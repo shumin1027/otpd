@@ -1,0 +1,5 @@
+PermitRootLogin yes
+ChallengeResponseAuthentication yes
+UsePAM yes
+PasswordAuthentication yes
+AuthenticationMethods keyboard-interactive
